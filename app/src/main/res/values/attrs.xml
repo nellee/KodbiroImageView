@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KodbiroImageView">
+        <!-- Border -->
+        <attr name="showBorder" format="boolean" />
+        <attr name="borderWidth" format="integer" />
+        <attr name="borderColor" format="integer" />
+        <!-- Shadow -->
+        <attr name="showBorderShadow" format="boolean" />
+        <attr name="shadowRadius" format="integer" />
+        <attr name="shadowColor" format="integer" />
+
+        <attr name="isImageViewCircular" format="boolean" />
+    </declare-styleable>
+</resources>

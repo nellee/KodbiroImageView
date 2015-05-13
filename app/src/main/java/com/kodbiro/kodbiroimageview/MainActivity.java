@@ -1,6 +1,7 @@
 package com.kodbiro.kodbiroimageview;
 
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
@@ -31,14 +32,17 @@ public class MainActivity extends ActionBarActivity {
     protected void onResume() {
         super.onResume();
         kodbiroImageView.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.ronaldo));
-        kodbiroImageView.showShadow(true);
+        kodbiroImageView.showShadow(false);
         kodbiroImageView.setCircularImageView(true);
         kodbiroImageView.showBorder(true);
-        kodbiroImageView.setBorderWidth(6);
+        kodbiroImageView.setBorderWidth(10);
+        kodbiroImageView.setBorderTextures(BitmapFactory.decodeResource(getResources(), R.drawable.ronaldo));
+        kodbiroImageView.setShadowColor(Color.CYAN);
 
         kodbiroImageView3.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_launcher));
         kodbiroImageView3.showShadow(true);
         kodbiroImageView3.setCircularImageView(true);
+        kodbiroImageView3.setShadowColor(Color.RED);
 
         kodbiroImageView4.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.test));
         kodbiroImageView4.setCircularImageView(true);

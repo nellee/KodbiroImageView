@@ -4,6 +4,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,6 +50,9 @@ public class MainActivity extends ActionBarActivity {
         kodbiroImageView4.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.test));
         kodbiroImageView4.setCircularImageView(true);
 
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(500, 700);
+        lp.gravity = Gravity.CENTER;
+        kodbiroImageView2.setLayoutParams(lp);
         kodbiroImageView2.setImageBitmap(BitmapFactory.decodeResource(this.getResources(), R.drawable.ronaldo));
         kodbiroImageView2.setBorderWidth(4);
         kodbiroImageView2.showBorder(true);

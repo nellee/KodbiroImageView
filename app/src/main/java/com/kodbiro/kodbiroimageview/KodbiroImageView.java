@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
@@ -19,7 +20,7 @@ import android.widget.ImageView;
  * KodbiroImageView class is custom ImageView class for displaying image
  * Can load images from various sources (such as resources or content providers)
  * Provides custom shadow around image and custom border
- * Can display image in rectangle and circle shape
+ * Can display image in rectangular and circular shape
  * Preserve aspect ratio of image
  */
 public class KodbiroImageView extends ImageView{
@@ -79,7 +80,7 @@ public class KodbiroImageView extends ImageView{
 
     /**
      * set border textures from bitmap, shader will be create with repeat tileX and tileY
-     * @param bitmap
+     * @param bitmap texture
      */
     public void setBorderTextures(Bitmap bitmap){
         if (borderPaint != null){
@@ -126,7 +127,7 @@ public class KodbiroImageView extends ImageView{
 
     /**
      * this will set circular view radius
-     * @param circularImageViewRadius
+     * @param circularImageViewRadius int radius
      */
     public void setCircularImageViewRadius(int circularImageViewRadius) {
         this.circularImageViewRadius = circularImageViewRadius;
@@ -158,7 +159,7 @@ public class KodbiroImageView extends ImageView{
         //create rectangle for image
         this.rectForImage = new Rect();
 
-        //create paint for dawing border
+        //create paint for drawing border
         this.borderPaint = new Paint();
         this.setBorderColor(Color.WHITE);
         this.borderPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -192,7 +193,7 @@ public class KodbiroImageView extends ImageView{
     }
 
     @Override
-    public void onDraw(Canvas canvas)
+    public void onDraw(@NonNull Canvas canvas)
     {
         if (scaledBitmap != null) {
             if (!isCircularImageView){
@@ -206,7 +207,7 @@ public class KodbiroImageView extends ImageView{
     }
 
     /**
-     * Draw rectangle ImageView with shadow, border and scaled bitmap on canvas
+     * Draw rectangular ImageView with shadow, border and scaled bitmap on canvas
      *
      * @param canvas    canvas on which to draw
      */
@@ -271,7 +272,7 @@ public class KodbiroImageView extends ImageView{
             if (!isCircularImageView){
                 measuredDimensionForRectangle(imageSideRatio, viewSideRatio, widthMeasureSpec, heightMeasureSpec);
             } else {
-                measuredDimensionForCircle(imageSideRatio, viewSideRatio, widthMeasureSpec, heightMeasureSpec);
+                measuredDimensionForCircle(imageSideRatio, widthMeasureSpec, heightMeasureSpec);
             }
         } else {
             setMeasuredDimension(0, 0);
@@ -284,11 +285,10 @@ public class KodbiroImageView extends ImageView{
      * width and height need to be same size, smaller measured size will apply
      *
      * @param imageSideRatio drawable width / height
-     * @param viewSideRatio view width / height
      * @param widthMeasureSpec the measured width of this view
      * @param heightMeasureSpec the measured height of this view
      */
-    private void measuredDimensionForCircle(float imageSideRatio, float viewSideRatio, int widthMeasureSpec, int heightMeasureSpec) {
+    private void measuredDimensionForCircle(float imageSideRatio, int widthMeasureSpec, int heightMeasureSpec) {
         if (MeasureSpec.getSize(widthMeasureSpec) <= MeasureSpec.getSize(heightMeasureSpec)){
             viewWidth = MeasureSpec.getSize(widthMeasureSpec);
             viewHeight = (int) (viewWidth / imageSideRatio);
@@ -302,7 +302,7 @@ public class KodbiroImageView extends ImageView{
 
     /**
      * set new measured width and height of this view
-     * rectangle view
+     * rectangular view
      *
      * @param imageSideRatio drawable width / height
      * @param viewSideRatio view width / height

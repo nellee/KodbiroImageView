@@ -1,11 +1,22 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.groupId = "com.kodbiro"
+        pom.artifactId = "kodbiroimageview"
+        pom.version = "1.0"
+        repository(url: "file:///c:/projekti/nellee.github.io/")
+    }
+}
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.kodbiro.kodbiroimageview"
+        //applicationId "com.kodbiro.kodbiroimageview"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

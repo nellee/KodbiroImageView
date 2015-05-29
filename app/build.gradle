@@ -4,7 +4,7 @@ apply plugin: 'maven'
 
 uploadArchives {
     repositories.mavenDeployer {
-        pom.groupId = "com.kodbiro"
+        pom.groupId = "com.kodbiro.kodbiroimageview"
         pom.artifactId = "kodbiroimageview"
         pom.version = "1.0"
         repository(url: "file:///c:/projekti/nellee.github.io/")
@@ -16,7 +16,6 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        //applicationId "com.kodbiro.kodbiroimageview"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

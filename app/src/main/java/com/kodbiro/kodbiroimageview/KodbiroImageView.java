@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -23,6 +24,7 @@ import android.widget.ImageView;
  * Can display image in rectangular and circular shape
  * Preserve aspect ratio of image
  */
+
 public class KodbiroImageView extends ImageView{
 
     private Bitmap scaledBitmap;
@@ -47,7 +49,6 @@ public class KodbiroImageView extends ImageView{
     private boolean isCircularImageView;
     private int circularImageViewRadius;
     private Paint circularShaderPaint;
-
 
     /**
      * border visibility
@@ -132,6 +133,15 @@ public class KodbiroImageView extends ImageView{
     public void setCircularImageViewRadius(int circularImageViewRadius) {
         this.circularImageViewRadius = circularImageViewRadius;
         this.invalidate();
+    }
+
+    public KodbiroImageView(Builder builder) {
+        super(builder.context);
+        this.setImageDrawable(builder.imageDrawable);
+        this.setImageBitmap(builder.imageBitmap);
+        this.setImageResource(builder.imageResources);
+
+        setup();
     }
 
     public KodbiroImageView(Context context) {
@@ -318,6 +328,118 @@ public class KodbiroImageView extends ImageView{
             viewHeight = MeasureSpec.getSize(heightMeasureSpec);
             viewWidth = (int) (viewHeight * imageSideRatio);
             setMeasuredDimension(viewWidth, viewHeight);
+        }
+    }
+
+    /**
+     * Build:
+     * src - imageDrawable, imageBitmap, imageResources
+     *
+     *
+     */
+    public static class Builder {
+
+        private Context context;
+
+        //image background
+        private Drawable imageDrawable;
+        private Bitmap imageBitmap;
+        private int imageResources;
+
+        //border
+        private boolean isBorderVisible;
+        private int borderColor = Color.WHITE;
+        private int borderWidth;
+        private Bitmap bitmapTexture;
+
+        //circle
+        private boolean isCircular;
+        private int circleRadius;
+
+        //shadow
+        private boolean isShadowVisible;
+        private float shadowRadius = 6.0f;
+        private int shadowColor = Color.BLACK;
+
+        private ImageView imageView;
+
+        public Builder(Context context, boolean isCircular){
+            this.context = context;
+            this.isCircular = isCircular;
+        }
+
+        /**
+         * set drawable as ImageView src
+         * @param drawable image
+         */
+        public Builder imageDrawable(Drawable drawable){
+            this.imageDrawable = drawable;
+            return this;
+        }
+
+        /**
+         * set bitmap as ImageView src
+         * @param bitmap image
+         */
+        public Builder imageBitmap(Bitmap bitmap) {
+            this.imageBitmap = bitmap;
+            return this;
+        }
+
+        /**
+         * set image resource as ImageView src
+         * @param resource image
+         */
+        public Builder imageResources(int resource) {
+            this.imageResources = resource;
+            return this;
+        }
+
+        /**
+         * show border
+         * @param color set border color
+         * @param width set border width
+         */
+        public Builder showBorder(int color, int width){
+            this.isBorderVisible = true;
+            this.borderColor = color;
+            this.borderWidth = width;
+            return this;
+        }
+
+        /**
+         * set bitmap as border texture
+         * @param bitmap textures
+         */
+        public Builder borderTexture(Bitmap bitmap){
+            this.bitmapTexture = bitmap;
+            return this;
+        }
+
+        /**
+         * set radius for circular ImageView
+         * @param radius int
+         */
+        public Builder circleRadius(int radius){
+            this.circleRadius = radius;
+            return this;
+        }
+
+        /**
+         * show shadow
+         * @param radius set shadow radius
+         * @param color set shadow color
+         */
+        public Builder showShadow(float radius, int color){
+            this.isShadowVisible = true;
+            this.shadowRadius = radius;
+            this.shadowColor = color;
+            return this;
+        }
+
+        public KodbiroImageView buildInto (ImageView imageView){
+            this.imageView = imageView;
+            return new KodbiroImageView(this);
         }
     }
 }

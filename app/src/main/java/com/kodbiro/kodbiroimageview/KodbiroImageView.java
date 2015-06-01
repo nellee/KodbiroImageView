@@ -437,8 +437,7 @@ public class KodbiroImageView extends ImageView{
             return this;
         }
 
-        public KodbiroImageView buildInto (ImageView imageView){
-            this.imageView = imageView;
+        public KodbiroImageView buildInto (){
             return new KodbiroImageView(this);
         }
     }
